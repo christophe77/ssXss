@@ -34,6 +34,6 @@ function saveToJson(url, selector, payload) {
   xssLogStream.write(JSON.stringify(xssData) + "," + "\r\n");
 }
 
-const reportMaker = { createInitialReport, saveToJson };
+const reportWorker = { createInitialReport, saveToJson };
 
-module.exports = reportMaker;
+module.exports = reportWorker;

@@ -1,9 +1,9 @@
 const puppeteer = require("puppeteer");
-const formWorker = require("./formWorker");
-const reportMaker = require("./reportMaker");
+const formWorker = require("./workers/formWorker");
+const reportWorker = require("./workers/reportWorker");
 
 async function scan(url) {
-  reportMaker.createInitialReport(url);
+  reportWorker.createInitialReport(url);
 
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
