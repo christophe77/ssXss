@@ -1,15 +1,11 @@
 const puppeteer = require("puppeteer");
+const browserInstance = require("./browserInstance");
 const formWorker = require("./workers/formWorker");
 const reportWorker = require("./workers/reportWorker");
 
 async function scan(url) {
   reportWorker.createInitialReport(url);
-
-  const browser = await puppeteer.launch();
-  const page = await browser.newPage();
-  await page.setDefaultNavigationTimeout(5000);
-  await page.setUserAgent("UA-NODE-XSS-SCANNER");
-  await page.goto(url, { waitUntil: "networkidle2" });
+  const { page, browser } = await browserInstance.getPage(url);
 
   try {
     const formElements = await page.$$("form");

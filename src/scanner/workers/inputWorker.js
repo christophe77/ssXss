@@ -1,5 +1,6 @@
 const puppeteer = require("puppeteer");
 const payloads = require("../payloads");
+const browserInstance = require("../browserInstance");
 const reportWorker = require("./reportWorker");
 
 async function test(url, selectors, formIndex) {
@@ -11,18 +12,13 @@ async function test(url, selectors, formIndex) {
     for (let payloadIndex = 0; payloadIndex < payloads.length; payloadIndex++) {
       const payload = payloads[payloadIndex];
       const selector = selectors[selectorIndex];
-      const browserInstance = await puppeteer.launch();
-      const page = await browserInstance.newPage();
+      const { page, browser } = await browserInstance.getPage(url);
 
       page.on("console", async (_console) => {
         if (_console.text().includes("ssxss")) {
           reportWorker.saveToJson(url, selector, payload);
         }
       });
-
-      await page.setDefaultNavigationTimeout(5000);
-      await page.setUserAgent("UA-NODE-XSS-SCANNER");
-      await page.goto(url, { waitUntil: "networkidle2" });
 
       try {
         const formElements = await page.$$("form");
@@ -41,7 +37,7 @@ async function test(url, selectors, formIndex) {
       } catch (error) {
         throw error;
       } finally {
-        await browserInstance.close();
+        await browser.close();
       }
     }
   }
