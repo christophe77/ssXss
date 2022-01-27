@@ -17,11 +17,12 @@ Save and run :<br />
 
 Logs will be saved inside the _/results_ folder. <br />
 You can add more xss payloads in _/scanner/payloads.js_ file. <br />
+Payload must execute console.log("ssxss") or alert("ssxss"). <br />
 
 ## Future
 
 The current version of ssXss is working well but it needs improvements :<br/>
 
-- Speed.
-- Remove the small amount of false positive results.
-- UI with an express interface or some console logs.
+- Improve speed.
+- Improve DOM analysis to go deeper.
+- Add a UI with express or some console logs.
