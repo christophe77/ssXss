@@ -1,4 +1,4 @@
-const puppeteer = require("puppeteer");
+const puppeteer = require('puppeteer');
 
 async function getPage(url, options) {
   const { userAgent, navigationTimeout } = options;
@@ -6,7 +6,7 @@ async function getPage(url, options) {
   const page = await browser.newPage();
   await page.setDefaultNavigationTimeout(navigationTimeout);
   await page.setUserAgent(userAgent);
-  await page.goto(url, { waitUntil: "networkidle2" });
+  await page.goto(url, { waitUntil: 'networkidle2' });
   return { browser, page };
 }
 

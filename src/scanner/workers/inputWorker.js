@@ -1,37 +1,40 @@
-const puppeteer = require("puppeteer");
-const { screenshotDebugStoragePath } = require("../utils");
-const payloads = require("../payloads");
-const browserInstance = require("../browserInstance");
-const reportWorker = require("./reportWorker");
+const { screenshotDebugStoragePath } = require('../utils');
+const payloads = require('../payloads');
+const browserInstance = require('../browserInstance');
+const reportWorker = require('./reportWorker');
 
 async function test(url, selectors, formIndex, options) {
   const { screenDebug, waitForSelectorTimeout } = options;
   for (
     let selectorIndex = 0;
     selectorIndex < selectors.length;
-    selectorIndex++
+    selectorIndex += 1
   ) {
     const selector = selectors[selectorIndex];
     const { page, browser } = await browserInstance.getPage(url, options);
     let xssFound = false;
-    let xssPayload = "";
-    page.on("console", async (_console) => {
-      if (_console.text().includes("ssxss")) {
+    let xssPayload = '';
+    page.on('console', async (_console) => {
+      if (_console.text().includes('ssxss')) {
         xssFound = true;
         reportWorker.saveToJson(url, selector, xssPayload);
-        console.log("\x1b[32m", `xss found on ${selector} with ${xssPayload}`);
+        console.log('\x1b[32m', `xss found on ${selector} with ${xssPayload}`);
       }
     });
-    page.on("dialog", async (_dialog) => {
-      if (_dialog.message().includes("ssxss")) {
+    page.on('dialog', async (_dialog) => {
+      if (_dialog.message().includes('ssxss')) {
         xssFound = true;
         reportWorker.saveToJson(url, selector, xssPayload);
         _dialog.accept();
-        console.log("\x1b[32m", `xss found on ${selector} with ${xssPayload}`);
+        console.log('\x1b[32m', `xss found on ${selector} with ${xssPayload}`);
       }
     });
 
-    for (let payloadIndex = 0; payloadIndex < payloads.length; payloadIndex++) {
+    for (
+      let payloadIndex = 0;
+      payloadIndex < payloads.length;
+      payloadIndex += 1
+    ) {
       const payload = payloads[payloadIndex];
       const debugScreenshot = async (currentPage, debugName) => {
         if (screenDebug) {
@@ -43,44 +46,49 @@ async function test(url, selectors, formIndex, options) {
       if (xssFound === false) {
         try {
           xssPayload = payload;
-          await debugScreenshot(page, "initial-view");
+          await debugScreenshot(page, 'initial-view');
 
-          const formElements = await page.$$("form");
+          const formElements = await page.$$('form');
           const currentForm = formElements[formIndex];
 
           await page.$eval(
             selector,
-            (element, value) => (element.value = value),
+            (element, value) => {
+              element.value = value;
+            },
             payload
           );
+
           // Ugly part to find the submit type
           try {
             await page.evaluate(
               (document) =>
-                document.querySelector("input[type=submit]").click(),
+                document.querySelector('input[type=submit]').click(),
               currentForm
             );
           } catch {
             try {
               await page.evaluate(
                 (document) =>
-                  document.querySelector("button[type=submit]").click(),
+                  document.querySelector('button[type=submit]').click(),
                 currentForm
               );
             } catch {
               try {
                 await page.evaluate((form) => form.submit(), currentForm);
-              } catch {}
+              } catch {
+                //
+              }
             }
           }
 
-          await debugScreenshot(page, "after-click");
+          await debugScreenshot(page, 'after-click');
 
           await page.waitForNavigation({
             timeout: waitForSelectorTimeout,
           });
 
-          if (payload.includes("onmouseover")) {
+          if (payload.includes('onmouseover')) {
             try {
               await page.waitForSelector(selector, {
                 timeout: waitForSelectorTimeout,
@@ -88,15 +96,15 @@ async function test(url, selectors, formIndex, options) {
               await page.hover(selector);
             } catch (error) {
               // Page may have changed after submit
-              await debugScreenshot(page, "error-onmouseover");
+              await debugScreenshot(page, 'error-onmouseover');
             }
           }
         } catch (error) {
           // console.log(error);
-          await debugScreenshot(page, "error-evaluate-form");
+          await debugScreenshot(page, 'error-evaluate-form');
         } finally {
-          await page.goto(url, { waitUntil: "networkidle2" });
-          await debugScreenshot(page, "after-reload");
+          await page.goto(url, { waitUntil: 'networkidle2' });
+          await debugScreenshot(page, 'after-reload');
         }
       }
     }
