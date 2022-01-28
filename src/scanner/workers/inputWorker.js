@@ -76,8 +76,8 @@ async function test(url, selectors, formIndex, options) {
             } catch {
               try {
                 await page.evaluate((form) => form.submit(), currentForm);
-              } catch {
-                //
+              } catch (error) {
+                // console.log(error);
               }
             }
           }
@@ -94,7 +94,7 @@ async function test(url, selectors, formIndex, options) {
                 timeout: waitForSelectorTimeout,
               });
               await page.hover(selector);
-            } catch (error) {
+            } catch {
               // Page may have changed after submit
               await debugScreenshot(page, 'error-onmouseover');
             }
