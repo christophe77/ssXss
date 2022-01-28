@@ -20,7 +20,7 @@ You can also just start the scanner with :<br />
 
     yarn scan http://<url>/<path>
 
-Logs will be saved inside the _/results_ folder. <br />
+Results will be saved in json inside the _/results_ folder. <br />
 You can add more xss payloads in _/scanner/payloads.js_ file. <br />
 Payload must execute console.log("ssxss") or alert("ssxss") and user action can be none or "onmouseover". <br />
 
@@ -30,7 +30,7 @@ The current version of ssXss is working well but it needs improvements :<br/>
 
 - Improve speed.
 - Improve DOM analysis to go deeper.
-- Add a UI with express or some console logs.
+- Maybe add a UI with express.
 
 ## Contribution
 
