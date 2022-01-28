@@ -45,15 +45,38 @@ async function test(url, selectors, formIndex, options) {
 
           const formElements = await page.$$("form");
           const currentForm = formElements[formIndex];
-          
+
           await page.$eval(
             selector,
             (element, value) => (element.value = value),
             payload
           );
-          await page.evaluate((form) => form.submit(), currentForm);
+          // Ugly part to find the submit type
+          try {
+            await page.evaluate(
+              (document) =>
+                document.querySelector("input[type=submit]").click(),
+              currentForm
+            );
+          } catch {
+            try {
+              await page.evaluate(
+                (document) =>
+                  document.querySelector("button[type=submit]").click(),
+                currentForm
+              );
+            } catch {
+              try {
+                await page.evaluate((form) => form.submit(), currentForm);
+              } catch {}
+            }
+          }
 
           await debugScreenshot(page, "after-click");
+
+          await page.waitForNavigation({
+            timeout: waitForSelectorTimeout,
+          });
 
           if (payload.includes("onmouseover")) {
             try {
@@ -63,11 +86,12 @@ async function test(url, selectors, formIndex, options) {
               await page.hover(selector);
             } catch (error) {
               // Page may have changed after submit
-              await debugScreenshot(page, "onmouseover");
+              await debugScreenshot(page, "error-onmouseover");
             }
           }
         } catch (error) {
-          console.log(error);
+          // console.log(error);
+          await debugScreenshot(page, "error-evaluate-form");
         } finally {
           await page.goto(url, { waitUntil: "networkidle2" });
           await debugScreenshot(page, "after-reload");
