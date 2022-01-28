@@ -4,12 +4,16 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "node ./src/index.js",
+    "start:file": "node ./src/index.js",
+    "start:web": "node ./src/express/index.js",
     "scan": "node ./src/index.js",
-    "dev": "nodemon --trace-warnings ./src/index.js",
+    "dev:file": "nodemon --trace-warnings ./src/index.js",
+    "dev:web": "nodemon --trace-warnings ./src/express/index.js",
     "lint": "eslint . --ext .js --fix"
   },
   "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.2",
     "puppeteer": "^13.1.1"
   },
   "devDependencies": {

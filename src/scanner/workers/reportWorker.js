@@ -27,9 +27,17 @@ function closeReport(url) {
   console.log('\x1b[36m%s\x1b[0m', 'Closing report');
   xssLogStream.end();
   const file = fileName(url);
-  const reportData = fs.readFileSync(file, 'utf8').replace(/\s+/g, '');
-  const sanitizedReportData = `${reportData.slice(0, -1)}]}}`;
+  const reportData = fs.readFileSync(file, 'utf8');
+  const last = reportData.charAt(reportData.length - 1);
+  const sanitizedReportData =
+    last === ',' ? `${reportData.slice(0, -1)}]}}` : `${reportData}]}}`;
   fs.writeFileSync(file, sanitizedReportData);
+}
+function getJsonReport(url) {
+  console.log('\x1b[36m%s\x1b[0m', 'Sending JSON report');
+  const file = fileName(url);
+  const reportData = fs.readFileSync(file, 'utf8');
+  return reportData;
 }
 function clearScreenshots() {
   console.log('\x1b[36m%s\x1b[0m', 'Clearing screenshots');
@@ -58,6 +66,7 @@ const reportWorker = {
   createInitialReport,
   clearScreenshots,
   closeReport,
+  getJsonReport,
   saveToJson,
 };
 

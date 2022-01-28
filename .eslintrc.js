@@ -13,6 +13,7 @@ module.exports = {
     'no-await-in-loop': 0,
     'no-console': 0,
     'no-param-reassign': 0,
+    'no-unsafe-finally': 0,
     semi: ['error', 'always'],
     quotes: ['error', 'single'],
     'prettier/prettier': [

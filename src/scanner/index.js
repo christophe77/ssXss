@@ -4,6 +4,7 @@ const {
   createInitialReport,
   clearScreenshots,
   closeReport,
+  getJsonReport,
 } = require('./workers/reportWorker');
 
 async function scan(url, options) {
@@ -29,6 +30,10 @@ async function scan(url, options) {
   } finally {
     await browser.close();
     closeReport(url);
+    if (options.express) {
+      return getJsonReport(url);
+    }
+    return '';
   }
 }
 

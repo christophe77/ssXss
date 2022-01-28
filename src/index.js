@@ -15,6 +15,7 @@ const devUrl = 'https://xss-game.appspot.com/level2/frame';
 const url = args[0] || devUrl;
 const options = {
   screenDebug: false,
+  express: false,
   userAgent: 'UA-SSXSS',
   navigationTimeout: 5000,
   waitForSelectorTimeout: 3000,
