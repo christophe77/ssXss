@@ -28,6 +28,8 @@ Results will be saved in json inside the _/results_ folder. <br />
 
 ### From express
 
+Edit _/src/express/index.js_ file and set the port that you want.<br />
+
     yarn start:web
 
 ## Customization

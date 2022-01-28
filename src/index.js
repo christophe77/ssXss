@@ -1,7 +1,4 @@
 const ssXss = require('./scanner');
-
-const args = process.argv.slice(2);
-
 // const devUrl = "http://localhost/xss";
 // const devUrl = "http://sudo.co.il/xss/level0.php";
 // const devUrl = "http://sudo.co.il/xss/level1.php";
@@ -11,8 +8,9 @@ const args = process.argv.slice(2);
 // const devUrl = "https://xss.challenge.training.hacq.me/challenges/baby01.php";
 // const devUrl = "https://xss-game.appspot.com/level1/frame";
 const devUrl = 'https://xss-game.appspot.com/level2/frame';
-
+const args = process.argv.slice(2);
 const url = args[0] || devUrl;
+
 const options = {
   screenDebug: false,
   express: false,
