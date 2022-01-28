@@ -1,4 +1,8 @@
 const payloads = [
+  "<script>alert('ssxss');</script>",
+  `"/><script>alert('ssxss');</script>`,
+];
+const payloadsave = [
   '<a onmouseover="console.log("ssxss")">ssxss</a>',
   `" onmouseover="console.log('ssxss')"`,
   `"onmouseover="console.log('ssxss')"`,

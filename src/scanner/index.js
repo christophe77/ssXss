@@ -3,9 +3,12 @@ const browserInstance = require("./browserInstance");
 const formWorker = require("./workers/formWorker");
 const reportWorker = require("./workers/reportWorker");
 
-async function scan(url) {
+async function scan(url, options) {
+
   reportWorker.createInitialReport(url);
-  const { page, browser } = await browserInstance.getPage(url);
+  reportWorker.clearScreenshots();
+
+  const { page, browser } = await browserInstance.getPage(url, options);
 
   try {
     const formElements = await page.$$("form");
@@ -13,7 +16,8 @@ async function scan(url) {
     if (!formElements || formElements.length === 0) {
       throw "No form element detected on that page";
     }
-    await formWorker.analyse(url, formElements.length);
+    await formWorker.analyse(url, formElements.length, options);
+
   } catch (error) {
     console.log(error);
   } finally {

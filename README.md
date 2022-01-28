@@ -11,6 +11,7 @@ Clone the project and install the dependencies :<br />
     yarn install
 
 Edit _/src/index.js_ file with the url you want to scan.<br />
+You can also edit the default options. I suggest you not to change the timeout values, they are a good compromise between speed and accuracy.<br />
 Save and run :<br />
 
     yarn start

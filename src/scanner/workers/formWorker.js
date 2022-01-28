@@ -28,18 +28,18 @@ function generateSelectorList(elementType, elementList) {
     .filter((selector) => selector !== "");
 }
 
-async function analyse(url, formElementCount) {
+async function analyse(url, formElementCount, options) {
   for (let formIndex = 0; formIndex < formElementCount; formIndex++) {
-    const { page, browser } = await browserInstance.getPage(url);
+    const { page, browser } = await browserInstance.getPage(url, options);
 
     try {
       const formElements = await page.$$("form");
       const currentForm = formElements[formIndex];
 
       const inputList = await getElementList(currentForm, "input");
-      const textAreaList = await getElementList(currentForm, "textarea");
-
       const inputSelectors = generateSelectorList("input", inputList);
+
+      const textAreaList = await getElementList(currentForm, "textarea");
       const textAreaSelectors = generateSelectorList("textarea", textAreaList);
 
       const writableSelectors = []
@@ -47,7 +47,7 @@ async function analyse(url, formElementCount) {
         .concat(textAreaSelectors);
 
       if (writableSelectors.length > 0) {
-        await inputWorker.test(url, writableSelectors, formIndex);
+        await inputWorker.test(url, writableSelectors, formIndex, options);
       }
     } catch (error) {
       throw error;

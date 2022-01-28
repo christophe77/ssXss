@@ -5,7 +5,10 @@ yarn-debug.log*
 yarn-error.log*
 
 # Results
-*.txt
+src/results/**/*
+
+# Debug
+src/debug-screenshots/**/*
 
 # node_modules
 node_modules/
