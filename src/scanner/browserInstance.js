@@ -3,8 +3,9 @@ const puppeteer = require('puppeteer');
 async function getPage(url, options) {
   const { userAgent, navigationTimeout } = options;
   const browser = await puppeteer.launch({
-    headless: true,
+    headless: false,
     args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    ignoreHTTPSErrors: true,
   });
   const page = await browser.newPage();
   await page.setDefaultNavigationTimeout(navigationTimeout);
