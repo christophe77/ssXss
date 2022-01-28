@@ -22,7 +22,7 @@ You can also just start the scanner with :<br />
 
 Logs will be saved inside the _/results_ folder. <br />
 You can add more xss payloads in _/scanner/payloads.js_ file. <br />
-Payload must execute console.log("ssxss") or alert("ssxss"). <br />
+Payload must execute console.log("ssxss") or alert("ssxss") and user action can be none or "onmouseover". <br />
 
 ## Future
 
@@ -31,3 +31,12 @@ The current version of ssXss is working well but it needs improvements :<br/>
 - Improve speed.
 - Improve DOM analysis to go deeper.
 - Add a UI with express or some console logs.
+
+## Contribution
+
+Any contribution is accepted.<br />
+
+## Bugs
+
+If you find any bugs, please feel an issue report.<br />
+If you have a website with an XSS vulnerability that is not discovered by ssXss you can contact me.<br />
