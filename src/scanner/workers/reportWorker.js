@@ -11,7 +11,7 @@ const formattedUrl = (url) =>
     .replace(/\//g, '-')
     .replace(/\?/g, '')
     .replace(/=/g, '');
-const fileName = (url) => `${resultsPath}\\${formattedUrl(url)}.json`;
+const fileName = (url) => `${resultsPath}/${formattedUrl(url)}.json`;
 
 function createInitialReport(url) {
   console.log('\x1b[36m%s\x1b[0m', 'Creating report');
