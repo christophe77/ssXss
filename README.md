@@ -10,11 +10,15 @@ Clone the project and install the dependencies :<br />
     cd ssXss
     yarn install
 
-Edit _/src/index.js_ file with the url you want to scan.<br />
+Edit _/src/index.js_ file and fill _devUrl_ with the url you want to scan.<br />
 You can also edit the default options. I suggest you not to change the timeout values, they are a good compromise between speed and accuracy.<br />
 Save and run :<br />
 
     yarn start
+
+You can also just start the scanner with :<br />
+
+    yarn scan http://<url>/<path>
 
 Logs will be saved inside the _/results_ folder. <br />
 You can add more xss payloads in _/scanner/payloads.js_ file. <br />

@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node ./src/index.js",
+    "scan": "node ./src/index.js",
     "dev": "nodemon --trace-warnings ./src/index.js",
     "lint": "eslint . --ext .js --fix"
   },
