@@ -19,6 +19,7 @@ async function test(url, selectors, formIndex, options) {
       if (_console.text().includes("ssxss")) {
         xssFound = true;
         reportWorker.saveToJson(url, selector, xssPayload);
+        console.log("\x1b[32m", `xss found on ${selector} with ${xssPayload}`);
       }
     });
     page.on("dialog", async (_dialog) => {
@@ -26,6 +27,7 @@ async function test(url, selectors, formIndex, options) {
         xssFound = true;
         reportWorker.saveToJson(url, selector, xssPayload);
         _dialog.accept();
+        console.log("\x1b[32m", `xss found on ${selector} with ${xssPayload}`);
       }
     });
 

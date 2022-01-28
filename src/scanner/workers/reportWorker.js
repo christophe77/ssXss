@@ -17,6 +17,7 @@ const fileName = (url) => {
 };
 
 function createInitialReport(url) {
+  console.log('\x1b[36m%s\x1b[0m', 'Creating report');
   const file = fileName(url);
   fs.exists(file, (exists) => {
     if (exists) {
@@ -30,6 +31,7 @@ function createInitialReport(url) {
   });
 }
 function clearScreenshots() {
+  console.log('\x1b[36m%s\x1b[0m', 'Clearing screenshots');
   if (fs.existsSync(screenshotDebugStoragePath)) {
     fs.readdir(screenshotDebugStoragePath, (err, files) => {
       if (err) throw err;
