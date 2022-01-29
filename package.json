@@ -1,8 +1,16 @@
 {
-  "name": "pupetteer-test",
+  "name": "ssxss",
   "version": "1.0.0",
   "main": "index.js",
+  "author": "christophe77 <chrisb@gmx.fr>",
+  "homepage": "http://165.227.229.84:6969/",
   "license": "MIT",
+  "keywords": [
+    "xss",
+    "scanner",
+    "express",
+    "puppeteer"
+  ],
   "scripts": {
     "start:file": "node ./src/index.js",
     "start:web": "node ./src/express/index.js",
