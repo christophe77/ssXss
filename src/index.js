@@ -1,7 +1,7 @@
 const ssXss = require('./scanner');
 
-const devUrl = 'http://localhost/xss';
-// const devUrl = "http://sudo.co.il/xss/level0.php";
+// const devUrl = 'http://localhost/xss';
+const devUrl = 'http://sudo.co.il/xss/level0.php';
 // const devUrl = "http://sudo.co.il/xss/level1.php";
 // const devUrl = "http://sudo.co.il/xss/level2.php";
 // const devUrl = "http://sudo.co.il/xss/level3.php";
@@ -19,4 +19,9 @@ const options = {
   navigationTimeout: 5000,
   waitForSelectorTimeout: 3000,
 };
-ssXss.scan(url, options);
+// ssXss.scan(url, options);
+const selectors = {
+  inputs: ['input[name="email"]'],
+  submit: 'input[type="submit"]',
+};
+ssXss.advancedScan(url, selectors, options);
