@@ -39,28 +39,64 @@
 
   <body>
     <nav>
-      <div class="nav-wrapper black" style="text-align: center">
-        <div class="yellow-text">ssXss</div>
+      <div
+        class="nav-wrapper"
+        style="text-align: center; background-color: #26a69a"
+      >
+        <img src="./assets/logo.png" alt="ssxss" width="50px" />
       </div>
     </nav>
+
     <div style="padding: 10px">
-      <div class="input-field col s12">
-        <input id="url" type="text" class="validate" />
-        <label for="url">Url to scan</label>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="url" type="text" class="validate" />
+          <label for="url">url to scan</label>
+        </div>
       </div>
-      <div>
-        <a
-          id="scan"
-          onclick="scanForms(document.getElementById('url').value)"
-          class="waves-effect waves-light btn"
-          ><i class="material-icons left">cloud</i>scan</a
+      <span>Optional :</span>
+      <div class="row">
+        <div class="input-field col s6">
+          <input id="inputs" type="text" class="validate" />
+          <label for="inputs">input selectors</label>
+        </div>
+
+        <div class="input-field col s6">
+          <input id="submit" type="text" class="validate" />
+          <label for="submit">submit selector</label>
+        </div>
+      </div>
+      <div class="row">
+        <a id="scan" onclick="scan()" class="waves-effect waves-light btn">
+          <i class="material-icons left">cloud</i>scan</a
         >
       </div>
-      <div class="progress" id="loading">
-        <div class="indeterminate"></div>
+      <div>
+        input selectors is a list of selectors to test, separated by a comma.
+        Exemples :
+        <ul>
+          <li>
+            <xmp
+>input[name="username"],input[name="email"],input[name="password"]</xmp
+            >
+          </li>
+          <li><xmp>[input[name="email"]]</xmp></li>
+        </ul>
       </div>
-      <div id="results" style="margin-top: 15px"></div>
+      <div>
+        submit selector exemples :
+        <ul>
+          <li><xmp>input[type="submit"]</xmp></li>
+          <li><xmp>button[type="submit"]</xmp></li>
+        </ul>
+      </div>
     </div>
+
+    <div class="progress" id="loading">
+      <div class="indeterminate"></div>
+    </div>
+    <div id="results" style="margin-top: 15px"></div>
+
     <script src="./js/index.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   </body>

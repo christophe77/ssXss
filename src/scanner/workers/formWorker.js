@@ -1,15 +1,15 @@
-const browserInstance = require('../browserInstance');
-const inputWorker = require('./inputWorker');
+const browserInstance = require("../browserInstance");
+const inputWorker = require("./inputWorker");
 
 async function getElementList(form, elementType) {
   const inputList = await form.$$eval(elementType, (inputs) =>
     inputs
       .map((input) => ({
-        name: input.getAttribute('name'),
-        id: input.getAttribute('id'),
-        type: input.getAttribute('type'),
+        name: input.getAttribute("name"),
+        id: input.getAttribute("id"),
+        type: input.getAttribute("type"),
       }))
-      .filter((input) => input.type !== 'submit' && input.type !== 'hidden')
+      .filter((input) => input.type !== "submit" && input.type !== "hidden")
   );
   return inputList;
 }
@@ -23,9 +23,9 @@ function generateSelectorList(elementType, elementList) {
       if (element.name && element.name !== null) {
         return `${elementType}[name=${element.name}]`;
       }
-      return '';
+      return "";
     })
-    .filter((selector) => selector !== '');
+    .filter((selector) => selector !== "");
 }
 
 async function analyse(url, formElementCount, options) {
@@ -33,14 +33,14 @@ async function analyse(url, formElementCount, options) {
     const { page, browser } = await browserInstance.getPage(url, options);
 
     try {
-      const formElements = await page.$$('form');
+      const formElements = await page.$$("form");
       const currentForm = formElements[formIndex];
 
-      const inputList = await getElementList(currentForm, 'input');
-      const inputSelectors = generateSelectorList('input', inputList);
+      const inputList = await getElementList(currentForm, "input");
+      const inputSelectors = generateSelectorList("input", inputList);
 
-      const textAreaList = await getElementList(currentForm, 'textarea');
-      const textAreaSelectors = generateSelectorList('textarea', textAreaList);
+      const textAreaList = await getElementList(currentForm, "textarea");
+      const textAreaSelectors = generateSelectorList("textarea", textAreaList);
 
       const writableSelectors = []
         .concat(inputSelectors)

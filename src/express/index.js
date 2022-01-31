@@ -28,9 +28,9 @@ app.post("/scan-forms", async (req, res) => {
   res.send(results);
 });
 app.post("/scan-inputs", async (req, res) => {
-  const { urlToScan } = req.body;
+  const { urlToScan, selectors } = req.body;
   const scanOptions = { ...options, scanType: inputs };
-  const results = await ssXss.scanInputs(urlToScan, scanOptions);
+  const results = await ssXss.scanInputs(urlToScan, selectors, scanOptions);
   res.send(results);
 });
 
