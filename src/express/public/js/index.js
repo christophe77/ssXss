@@ -27,14 +27,14 @@ function appendData(urlToScan, result) {
     resultContainer.appendChild(div);
   }
 }
-function scan(urlToScan) {
+function scanForms(urlToScan) {
   resultContainer.innerHTML = "";
   if (urlToScan && urlToScan !== "") {
     btnScan.setAttribute("disabled", "disabled");
     loadingBar.style.display = "";
     const params = JSON.stringify({ urlToScan: urlToScan });
     const http = new XMLHttpRequest();
-    http.open("POST", "/scan", true);
+    http.open("POST", "/scan-forms", true);
     http.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
     http.onload = function () {
       const results = http.response;

@@ -12,10 +12,9 @@
     "puppeteer"
   ],
   "scripts": {
-    "start:file": "node ./src/index.js",
+    "start:cmd": "node ./src/index.js",
     "start:web": "node ./src/express/index.js",
-    "scan": "node ./src/index.js",
-    "dev:file": "nodemon --trace-warnings ./src/index.js",
+    "dev:cmd": "nodemon --trace-warnings ./src/index.js",
     "dev:web": "nodemon --trace-warnings ./src/express/index.js",
     "lint": "eslint . --ext .js --fix"
   },

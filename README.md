@@ -14,17 +14,24 @@ Clone the project and install the dependencies :<br />
 
 ### From command line
 
-Edit _/src/index.js_ file and fill _devUrl_ with the url you want to scan.<br />
-You can also edit the default options. I suggest you not to change the timeout values, they are a good compromise between speed and accuracy.<br />
-Save and run :<br />
+Edit _/src/index.js_ file and fill _url_ constant with the url you want to scan.<br />
+You can also edit the default options.<br />
+I suggest you not to change the timeout values, they are a good compromise between speed and accuracy.<br />
+If you want to scan and check all inputs inside all forms of the url, set _scanType: forms_<br/>
+If you want to check some specific inputs, set _scanType: inputs_<br/>
+If you want to store the results inside a json file, set _result: file_<br/>
+If you want to receive the results in json stream, set _result: stream_<br/>
+Use ssXss.scanForms(url, options) for full page scanning.<br />
+Create a selector object if you want to scan specific inputs :<br />
 
-    yarn start:file
+    const selectors = {
+        inputs: ['input[name="email"]', 'input[name="username"]'],
+        submit: 'input[type="submit"]',
+    };
 
-You can also just start the scanner with :<br />
+You can now start scanning.<br />
 
-    yarn scan http://<url>/<path>
-
-Results will be saved in json inside the _/results_ folder. <br />
+    yarn start:cmd
 
 ### From express
 
@@ -43,6 +50,7 @@ The current version of ssXss is working well but it needs improvements :<br/>
 
 - Improve speed.
 - Improve DOM analysis to go deeper.
+- Make npm package.
 
 ## Contribution
 
