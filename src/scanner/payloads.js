@@ -9,6 +9,7 @@ const payloads = [
   ';javascript:console.log("ssxss");//',
   '<<SCRIPT>console.log("ssxss");//<</SCRIPT>',
   `$('#div').html('<img alt="<x" title="/><img src=x onerror=console.log("ssxss")>">');`,
+  "'**console.log('ssxss'));//",
   `javascript:/*--></title></style></textarea></script></xmp><svg/onload='+/"/+/onmouseover=1/+/[*/[]/+console.log('ssxss')//'>`,
   '<a onmouseover="console.log("ssxss")">ssxss</a>',
   `" onmouseover="console.log('ssxss')"`,

@@ -2,13 +2,14 @@ const ssXss = require("./scanner");
 const { forms, file } = require("./globals");
 
 // const url = 'http://localhost/xss';
-const url = "http://sudo.co.il/xss/level0.php";
+// const url = "http://sudo.co.il/xss/level0.php";
 // const url = "http://sudo.co.il/xss/level1.php";
 // const url = "http://sudo.co.il/xss/level2.php";
 // const url = "http://sudo.co.il/xss/level3.php";
 // const url = "http://sudo.co.il/xss/level4.php";
 // const url = "https://xss-game.appspot.com/level1/frame";
 // const url = 'https://xss-game.appspot.com/level2/frame';
+const url = "https://xss-game.appspot.com/level4/frame";
 
 /* 
   const { forms, inputs, file, stream } = require("./globals");
@@ -30,10 +31,10 @@ const options = {
   screenDebug: false,
 };
 
-const selectors = {
+/* const selectors = {
   inputs: ['input[name="email"]', 'input[name="username"]'],
   submit: 'input[type="submit"]',
-};
+}; */
 
-// ssXss.scanForms(url, options);
-ssXss.scanInputs(url, selectors, options);
+ssXss.scanForms(url, options);
+// ssXss.scanInputs(url, selectors, options);
