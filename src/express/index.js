@@ -24,13 +24,13 @@ app.use(express.static(`${__dirname}/public`));
 app.post("/scan-forms", async (req, res) => {
   const { urlToScan } = req.body;
   const scanOptions = { ...options, scanType: forms };
-  const results = await ssXss.scanForms(urlToScan, scanOptions);
+  const results = await ssXss.scan(urlToScan, scanOptions);
   res.send(results);
 });
 app.post("/scan-inputs", async (req, res) => {
   const { urlToScan, selectors } = req.body;
   const scanOptions = { ...options, scanType: inputs };
-  const results = await ssXss.scanInputs(urlToScan, selectors, scanOptions);
+  const results = await ssXss.scan(urlToScan, scanOptions, selectors);
   res.send(results);
 });
 

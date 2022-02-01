@@ -19,6 +19,7 @@ You can also edit the default options.<br />
 I suggest you not to change the timeout values, they are a good compromise between speed and accuracy.<br />
 If you want to scan and check all inputs inside all forms of the url, set _scanType: forms_<br/>
 If you want to check some specific inputs, set _scanType: inputs_<br/>
+If you want to test all payloads after an url parameter, set _scanType: urlParam_<br/>
 If you want to store the results inside a json file, set _result: file_<br/>
 If you want to receive the results in json stream, set _result: stream_<br/>
 Use ssXss.scanForms(url, options) for full page scanning.<br />

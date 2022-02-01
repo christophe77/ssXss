@@ -1,12 +1,14 @@
 const browserInstance = require("./browserInstance");
 const formWorker = require("./workers/formWorker");
 const inputWorker = require("./workers/inputWorker");
+const urlWorker = require("./workers/urlWorker");
 const {
   createInitialReport,
   clearScreenshots,
   closeReport,
   getJsonReport,
 } = require("./workers/reportWorker");
+const globals = require("../globals");
 
 function beforeScanning(url) {
   createInitialReport(url);
@@ -59,8 +61,32 @@ async function scanInputs(url, selectors, options) {
     return afterScanning(url, options);
   }
 }
+async function scanUrlParam(url, options) {
+  beforeScanning(url);
+  try {
+    await urlWorker.testUrl(url, options);
+  } catch (error) {
+    //
+  } finally {
+    return afterScanning(url, options);
+  }
+}
+function scan(url, options, selectors) {
+  switch (options.scanType) {
+    case globals.forms:
+      scanForms(url, options);
+      break;
+    case globals.inputs:
+      scanInputs(url, options, selectors);
+      break;
+    case globals.urlParam:
+      scanUrlParam(url, options);
+      break;
+    default:
+      break;
+  }
+}
 const ssXss = {
-  scanForms,
-  scanInputs,
+  scan,
 };
 module.exports = ssXss;
